@@ -187,7 +187,8 @@
 
             $description = "File reports";
             $id2 = 2;
-            $test_task = new Task($description, $id2);
+            $status2 = 0;
+            $test_task = new Task($description, $id2, $status2);
             $test_task->save();
 
             //Act

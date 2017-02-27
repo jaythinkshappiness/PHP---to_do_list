@@ -80,6 +80,11 @@
         return $app['twig']->render('category.html.twig', array('category' => $category, 'categories' => Category::getAll(), 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
     });
 
+    $app->post("/delete_tasks", function() use($app){
+        Task::deleteAll();
+        return $app['twig']->render('index.html.twig');
+    });
+
     $app->post("/add_categories", function() use ($app) {
         $category = Category::find($_POST['category_id']);
         $task = Task::find($_POST['task_id']);

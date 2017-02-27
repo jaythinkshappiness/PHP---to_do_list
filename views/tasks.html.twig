@@ -24,6 +24,14 @@
     <form action='/delete_tasks' method='post'>
         <button type='submit'>Clear</button>
     </form>
+    {% if tasksdone is not empty %}
+        <p>Here are all your tasks that are completed:</p>
+        <ul>
+            {% for task in tasksdone %}
+                <li>{{task.getDescription}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
     <p><a href='/'>Home</a></p>
 </body>

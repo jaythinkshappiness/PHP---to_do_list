@@ -34,6 +34,19 @@
             //Assert
             $this->assertEquals($description, $result);
         }
+        function testGetStatus()
+        {
+            //Arrange
+            $description = "Do dishes.";
+            $status = 0;
+            $test_status = new Task($description,$status);
+
+            //Act
+            $result = $test_status->getStatus();
+
+            //Assert
+            $this->assertEquals($status, $result);
+        }
 
         function testSetDescription()
         {
@@ -53,8 +66,9 @@
         {
             //Arrange
             $id = 1;
+            $status = 0;
             $description = "Wash the dog";
-            $test_task = new Task($description, $id);
+            $test_task = new Task($description, $id, $status);
 
             //Act
             $result = $test_task->getId();
@@ -68,7 +82,8 @@
             //Arrange
             $description = "Wash the dog";
             $id = 1;
-            $test_task = new Task($description, $id);
+            $status = 0;
+            $test_task = new Task($description, $id, $status);
 
             //Act
             $test_task->save();
@@ -97,13 +112,15 @@
             //Arrange
             $description = "Wash the dog";
             $id = 1;
-            $test_task = new Task($description, $id);
+            $status = 0;
+            $test_task = new Task($description, $id, $status);
             $test_task->save();
 
 
             $description2 = "Water the lawn";
             $id2 = 2;
-            $test_task2 = new Task($description2, $id2);
+            $status2 = 0;
+            $test_task2 = new Task($description2, $id2, $status2);
             $test_task2->save();
 
             //Act
@@ -118,12 +135,14 @@
             //Arrange
             $description = "Wash the dog";
             $id = 1;
-            $test_task = new Task($description, $id);
+            $status = 0;
+            $test_task = new Task($description, $id, $status);
             $test_task->save();
 
             $description2 = "Water the lawn";
             $id2 = 2;
-            $test_task2 = new Task($description2, $id2);
+            $status2 = 0;
+            $test_task2 = new Task($description2, $id2, $status2);
             $test_task2->save();
 
             //Act
@@ -139,12 +158,14 @@
             //Arrange
             $description = "Wash the dog";
             $id = 1;
-            $test_task = new Task($description, $id);
+            $status = 0;
+            $test_task = new Task($description, $id, $status);
             $test_task->save();
 
             $description2 = "Water the lawn";
             $id2 = 2;
-            $test_task2 = new Task($description2, $id2);
+            $status2 = 0;
+            $test_task2 = new Task($description2, $id2, $status2);
             $test_task2->save();
 
             //Act
@@ -159,7 +180,8 @@
             //Arrange
             $description = "Wash the dog";
             $id = 1;
-            $test_task = new Task($description, $id);
+            $status = 0;
+            $test_task = new Task($description, $id, $status);
             $test_task->save();
 
             $new_description = "Clean the dog";
@@ -176,12 +198,14 @@
             //Arrange
             $description = "Wash the dog";
             $id = 1;
-            $test_task = new Task($description, $id);
+            $status = 0;
+            $test_task = new Task($description, $id, $status);
             $test_task->save();
 
             $description2 = "Water the lawn";
             $id2 = 2;
-            $test_task2 = new Task($description2, $id2);
+            $status2 = 0;
+            $test_task2 = new Task($description2, $id2, $status2);
             $test_task2->save();
 
 
@@ -201,7 +225,8 @@
 
             $description = "File reports";
             $id2 = 2;
-            $test_task = new Task($description, $id2);
+            $status2 = 0;
+            $test_task = new Task($description, $id2, $status2);
             $test_task->save();
 
             //Act

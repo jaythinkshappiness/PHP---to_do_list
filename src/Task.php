@@ -3,31 +3,38 @@
     {
         private $description;
         private $id;
+        private $status;
 
-        function __construct($description, $id = null)
+        function __construct($description, $id = null, $status=0)
         {
             $this->description = $description;
             $this->id = $id;
+            $this->status = $status;
         }
 
         function setDescription($new_description)
         {
             $this->description = (string) $new_description;
         }
-
+        function setStatus($new_status)
+        {
+            $this->status = (bool) $new_status;
+        }
+        function getStatus()
+        {
+            return $this->status;
+        }
         function getDescription()
         {
             return $this->description;
         }
-
         function getId()
         {
             return $this->id;
         }
-
         function save()
         {
-              $GLOBALS['DB']->exec("INSERT INTO tasks (description) VALUES ('{$this->getDescription()}');");
+              $GLOBALS['DB']->exec("INSERT INTO tasks (description , status) VALUES ('{$this->getDescription()}', {$this->getStatus()});");
               $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -37,8 +44,9 @@
             $tasks = array();
             foreach($returned_tasks as $task) {
                 $description = $task['description'];
+                $status = (bool) $task['status'];
                 $id = $task['id'];
-                $new_task = new Task($description, $id);
+                $new_task = new Task($description, $id, $status);
                 array_push($tasks, $new_task);
             }
             return $tasks;
@@ -65,6 +73,11 @@
         {
             $GLOBALS['DB']->exec("UPDATE tasks SET description = '{$new_description}' WHERE id = {$this->getId()};");
             $this->setDescription($new_description);
+        }
+        function updateStatus($new_status)
+        {
+            $GLOBALS['DB']->exec("UPDATE tasks SET status = '{$new_status}' WHERE id = {$this->getId()};");
+            $this->setStatus($new_status);
         }
 
         function delete()
@@ -95,5 +108,6 @@
             }
             return $categories;
         }
+
     }
 ?>

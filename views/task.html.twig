@@ -27,6 +27,23 @@
         <button type='submit'>Add category</button>
     </form>
 
+
+
+    <form action='/tasks' method='post'>
+        <input name="task_description" type="hidden" value="{{ task.getDescription }}">
+        <input type="hidden" name="task_id" value="{{task.getId}}">
+        <input type="radio" name="name" value="true">
+        <!-- <label for="category_id">Select a category</label>
+        <select id='category_id' name='category_id' type='text'>
+          {% for category in all_categories %}
+            <option value="{{ category.getId }}"> {{ category.getName }} </option>
+          {% endfor %}
+        </select> -->
+        <button type='submit'>Mark as completed</button>
+    </form>
+
+
+
     <p><a href='/'>Home</a></p>
 </body>
 </html>
