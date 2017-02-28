@@ -5,11 +5,6 @@
     require_once __DIR__."/../src/Category.php";
 
 
-    // session_start();
-    // if (empty($_SESSION['list_of_tasks'])) {
-    //     $_SESSION['list_of_tasks'] = array();
-    // }
-
     $app = new Silex\Application();
     $app['debug']= true;
     $server = 'mysql:host=localhost:8889;dbname=to_do';
@@ -29,7 +24,7 @@
     });
 
     $app->get("/tasks", function() use ($app) {
-        return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll()));
+        return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll(),'status' => Task::getAll()));
     });
 
     $app->get("/categories", function() use ($app) {
@@ -46,6 +41,14 @@
         $task = Task::find($id);
         return $app['twig']->render('task.html.twig', array('task' => $task, 'categories' => $task->getCategories(), 'all_categories' => Category::getAll()));
     });
+    $app->post("/status", function() use ($app) {
+        foreach ($_POST['checkbox'] as $checked) {
+            $check = Task::find($checked);
+            $check->updateStatus(1);
+        }
+        return $app['twig']->render('tasks.html.twig', array('status' => Task::getAll(),'tasks' => Task::getAll()));
+    });
+
 
     $app->post("/categories", function() use ($app) {
         $category = new Category($_POST['name']);

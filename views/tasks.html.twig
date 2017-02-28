@@ -9,8 +9,13 @@
         <p>Here are all your tasks:</p>
         <ul>
             {% for task in tasks %}
-                <li><a href="/tasks/{{ task.getId }}">{{ task.getDescription }}</a></li>
-            {% endfor %}
+            if
+            <form action="/status" method="post">
+                <li><a href="/tasks/{{ task.getId }}">{{ task.getDescription }}</a><input type="checkbox" name="checkbox[]" value="{{task.getId}}"><input type="hidden" name="status_description" value="{{task.getDescription}}"></li><br>
+                {% endfor %}
+
+                <button type="submit">Mark as completed</button>
+            </form>
         </ul>
     {% endif %}
 
@@ -20,18 +25,21 @@
 
         <button type='submit'>Add task</button>
     </form>
+    {% if tasks is not empty %}
+        <p>Here are all your complete tasks:</p>
+        <ul>
+            {% for task in tasks %}
+                {% if task.getStatus == 1 %}
+                    <li>{{ task.getDescription}}</li>
+                    {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 
     <form action='/delete_tasks' method='post'>
         <button type='submit'>Clear</button>
     </form>
-    {% if tasksdone is not empty %}
-        <p>Here are all your tasks that are completed:</p>
-        <ul>
-            {% for task in tasksdone %}
-                <li>{{task.getDescription}}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+
 
     <p><a href='/'>Home</a></p>
 </body>
